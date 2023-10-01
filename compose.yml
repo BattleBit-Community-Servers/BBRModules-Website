@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:16
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: bbrmodules
+      POSTGRES_USER: bbrmodules
+      POSTGRES_DB: bbrmodules
+
+volumes:
+  db_data:

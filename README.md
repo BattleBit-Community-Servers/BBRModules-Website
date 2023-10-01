@@ -1,28 +1,23 @@
-# Create T3 App
+# BBRModules
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## Development
 
-## What's next? How do I make an app with this?
+```shell
+# Enable Corepack (optional)
+corepack enable
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+# Install dependencies
+pnpm i
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+# Initialize environment variables
+cp .env.example .env
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+# Set the NextAuth secret (you can also just generate one with your favourite password manager)
+sed "s/# NEXTAUTH_SECRET=\"\"/NEXTAUTH_SECRET=\"$(openssl rand -base64 32 | sed -E  -e 's/(\/|\+)//g')\"/" .env > .env
 
-## Learn More
+# Run database
+docker compose -f compose.yml -f compose.development.yml up -d
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+# Run development server
+pnpm dev
+```
